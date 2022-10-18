@@ -465,6 +465,7 @@ std::vector<std::vector<float>> Lib_Mfcc::STFT(std::vector<float> audio, int hop
 
     // num of fft frame y_frams = utils.frams(y, frame_length=nfft, hop_length=hop_length)
     int y_frams = 1 + int((audio.size() - n_fft) / hopLength);
+    // int y_frams = 1 + int((audio.size()) / hopLength);  
 
     std::vector<std::vector<float>> stft_matrix(y_frams, std::vector<float>(1 + (n_fft / 2)));
 
@@ -478,7 +479,7 @@ std::vector<std::vector<float>> Lib_Mfcc::STFT(std::vector<float> audio, int hop
         }
 
         std::vector<float> fft((n_fft / 2) + 1, 0);
-        auto output = getFFT(audioData);
+        auto output = getFFT(audioData);    //此处output已经是频率里面的对称的数组
         for (auto i = 0; i < fft.size(); i++) {
             fft[i] = abs(output[i]);
         }
